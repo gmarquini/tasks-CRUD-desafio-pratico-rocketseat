@@ -32,6 +32,14 @@ class TasksController {
 
     res.json(task);
   }
+
+  index(req: Request, res: Response) {
+    const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
+    const tasks = db.tasks;
+
+    res.json(tasks);
+  }
 }
 
 export { TasksController };
