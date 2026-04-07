@@ -107,6 +107,28 @@ class TasksController {
 
     res.status(204).send();
   }
+
+  complete(req: Request, res: Response) {
+    const paramSchema = z.object({
+      id: z.string().uuid(),
+    });
+
+    const { id } = paramSchema.parse(req.params);
+
+    const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
+    const task = db.tasks.find((task: any) => task.id === id);
+
+    if (!task) {
+      throw new AppError("Task not found", 404);
+    }
+
+    task.completed_at = "completed";
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.json("ok");
+  }
 }
 
 export { TasksController };

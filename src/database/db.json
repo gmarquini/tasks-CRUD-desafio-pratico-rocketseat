@@ -1,3 +1,12 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "40e464e0-d5f1-45bd-8da8-689381b35f52",
+      "title": "Gerenciar Banco de Dados.",
+      "description": "Verificar erros e aprimorar se necessário",
+      "completed_at": "completed",
+      "created_at": "2026-04-07T16:28:55.904Z",
+      "updated_at": "2026-04-07T16:28:55.904Z"
+    }
+  ]
 }

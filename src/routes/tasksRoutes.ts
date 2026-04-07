@@ -6,7 +6,8 @@ const tasksController = new TasksController();
 
 tasksRoutes.post("/", tasksController.create);
 tasksRoutes.get("/", tasksController.index);
-tasksRoutes.patch("/:id", tasksController.update);
+tasksRoutes.put("/:id", tasksController.update);
 tasksRoutes.delete("/:id", tasksController.remove);
+tasksRoutes.patch("/:id/complete", tasksController.complete);
 
 export { tasksRoutes };
