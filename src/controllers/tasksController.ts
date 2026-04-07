@@ -25,7 +25,6 @@ class TasksController {
       updated_at: new Date(),
     };
 
-    console.log(task);
     db.tasks.push(task);
 
     fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
@@ -45,14 +44,68 @@ class TasksController {
 
     const tasks = db.tasks.filter((task: any) => {
       return (
-        (title ? task.title.includes(title.toLowerCase()) : true) &&
+        (title
+          ? task.title.toLowerCase().includes(title.toLowerCase())
+          : true) &&
         (description
-          ? task.description.includes(description.toLowerCase())
+          ? task.description.toLowerCase().includes(description.toLowerCase())
           : true)
       );
     });
 
     res.json(tasks);
+  }
+
+  update(req: Request, res: Response) {
+    const bodySchema = z.object({
+      title: z.string(),
+      description: z.string(),
+    });
+
+    const paramSchema = z.object({
+      id: z.string().uuid(),
+    });
+
+    const { title, description } = bodySchema.parse(req.body);
+    const { id } = paramSchema.parse(req.params);
+
+    const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
+    const task = db.tasks.find((task: any) => task.id === id);
+
+    if (!task) {
+      throw new AppError("Task not found", 404);
+    }
+
+    task.title = title;
+    task.description = description;
+    task.updated_at = new Date();
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.json(task);
+  }
+
+  remove(req: Request, res: Response) {
+    const paramSchema = z.object({
+      id: z.string().uuid(),
+    });
+
+    const { id } = paramSchema.parse(req.params);
+
+    const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
+
+    const taskExists = db.tasks.some((task: any) => task.id === id);
+
+    if (!taskExists) {
+      throw new AppError("Task not found", 404);
+    }
+
+    db.tasks = db.tasks.filter((task: any) => task.id !== id);
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.status(204).send();
   }
 }
 
