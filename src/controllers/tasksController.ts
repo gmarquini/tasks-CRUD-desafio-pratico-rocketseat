@@ -34,9 +34,23 @@ class TasksController {
   }
 
   index(req: Request, res: Response) {
+    const querySchema = z.object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+    });
+
+    const { title, description } = querySchema.parse(req.query);
+
     const db = JSON.parse(fs.readFileSync(dbPath, "utf-8"));
 
-    const tasks = db.tasks;
+    const tasks = db.tasks.filter((task: any) => {
+      return (
+        (title ? task.title.includes(title.toLowerCase()) : true) &&
+        (description
+          ? task.description.includes(description.toLowerCase())
+          : true)
+      );
+    });
 
     res.json(tasks);
   }
