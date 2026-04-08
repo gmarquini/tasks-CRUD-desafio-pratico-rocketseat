@@ -2,7 +2,7 @@
 
 Projeto de uma API REST para gerenciamento de tarefas, desenvolvido em TypeScript com Express. Foi construído como exercício prático seguindo conceitos de validação, upload de CSV e persistência simples em arquivo JSON.
 
-## 🚀 Visão Geral
+## Visão Geral
 
 - API de tarefas com operações CRUD completas
 - Validação de dados usando `zod`
@@ -11,7 +11,7 @@ Projeto de uma API REST para gerenciamento de tarefas, desenvolvido em TypeScrip
 - Tratamento de erros personalizado
 - Uso de `multer` para upload de arquivos
 
-## 🧩 Tecnologias
+## Tecnologias
 
 - Node.js
 - TypeScript
@@ -21,7 +21,7 @@ Projeto de uma API REST para gerenciamento de tarefas, desenvolvido em TypeScrip
 - CSV-Parse
 - TSX
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 - `src/server.ts` - inicializa o servidor
 - `src/app.ts` - configura o Express, rotas e middleware de erro
@@ -32,7 +32,7 @@ Projeto de uma API REST para gerenciamento de tarefas, desenvolvido em TypeScrip
 - `src/database/db.json` - banco de dados local em formato JSON
 - `src/middlewares/multer.ts` - configuração de upload de arquivos
 
-## ✅ Funcionalidades
+## Funcionalidades
 
 - Criar tarefa
 - Listar tarefas com filtro por título ou descrição
@@ -41,7 +41,7 @@ Projeto de uma API REST para gerenciamento de tarefas, desenvolvido em TypeScrip
 - Marcar tarefa como completa
 - Fazer upload de arquivo CSV para inserir tarefas em lote
 
-## 📌 Endpoints
+## Endpoints
 
 Base: `http://localhost:3333/tasks`
 
@@ -52,7 +52,7 @@ Base: `http://localhost:3333/tasks`
 - `PATCH /tasks/:id/complete` - marca tarefa como concluída
 - `POST /tasks/upload` - importa tarefas a partir de CSV
 
-## 🛠️ Execução
+## Execução
 
 1. Instalar dependências:
 
@@ -72,7 +72,7 @@ npm run dev
 http://localhost:3333
 ```
 
-## 📌 Observações Técnicas
+## Observações Técnicas
 
 - O projeto usa JSON como banco de dados local para simplificar o protótipo.
 - Caso `src/database/db.json` não exista, ele é criado automaticamente na primeira inserção de tarefa.
@@ -80,14 +80,14 @@ http://localhost:3333
 - O upload de CSV exige um arquivo com cabeçalho e insere novas tarefas em lote.
 - Há um middleware de tratamento de erros para respostas consistentes.
 
-## 💡 Por que este projeto é relevante para recrutadores
+## Por que este projeto é relevante para recrutadores
 
 - Demonstra conhecimento em Node.js com TypeScript
 - Mostra habilidade em construir APIs RESTful com rotas e controllers
 - Exibe uso de validação, tratamento de erros e upload de arquivos
 - Evidencia capacidade de trabalhar com persistência e importação de dados
 
-## 📍 Próximos passos possíveis
+## Próximos passos possíveis
 
 - Adicionar testes automatizados
 - Implementar autenticação e autorização
