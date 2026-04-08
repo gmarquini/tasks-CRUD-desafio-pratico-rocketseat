@@ -154,11 +154,17 @@ class TasksController {
 
     const parsedCSV = await CSVParser(file)
 
-    console.log(parsedCSV)
-
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'))
 
-    db.tasks.push(parsedCSV)
+    const hasDuplicated = parsedCSV.some((newTask) =>
+      db.tasks.some((existingTask: any) => existingTask.title === newTask.title)
+    )
+
+    if (hasDuplicated) {
+      throw new AppError('Tarefa já existe')
+    }
+
+    parsedCSV.forEach((e) => db.tasks.push(e))
 
     fs.writeFileSync(dbPath, JSON.stringify(db, null, 2))
 
