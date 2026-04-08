@@ -11,6 +11,13 @@ type file = {
   file: any
 }
 
+function ensureDatabaseExists(dbPath: string) {
+  if (!fs.existsSync(dbPath)) {
+    const initialData = { tasks: [] }
+    fs.writeFileSync(dbPath, JSON.stringify(initialData, null, 2))
+  }
+}
+
 class TasksController {
   create(req: Request, res: Response) {
     const bodySchema = z.object({
@@ -20,6 +27,7 @@ class TasksController {
 
     const { title, description } = bodySchema.parse(req.body)
 
+    ensureDatabaseExists(dbPath)
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'))
 
     const task = {
@@ -154,6 +162,7 @@ class TasksController {
 
     const parsedCSV = await CSVParser(file)
 
+    ensureDatabaseExists(dbPath)
     const db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'))
 
     const hasDuplicated = parsedCSV.some((newTask) =>
