@@ -75,6 +75,7 @@ http://localhost:3333
 ## 📌 Observações Técnicas
 
 - O projeto usa JSON como banco de dados local para simplificar o protótipo.
+- Caso `src/database/db.json` não exista, ele é criado automaticamente na primeira inserção de tarefa.
 - A validação é feita com `zod` para garantir que títulos e descrições atendam aos requisitos mínimos.
 - O upload de CSV exige um arquivo com cabeçalho e insere novas tarefas em lote.
 - Há um middleware de tratamento de erros para respostas consistentes.
